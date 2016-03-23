@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body, h1, h2, h3, h4, h5, h6, p, pre, ul, ol, li, dl, dt, dd, form, input, textarea, select, option {
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+	a{
+		text-decoration: none;
+	}
+	img {
+         border: none;
+    }
+    .box{
+    	width: 1200px;
+        height: 40px;
+        background: #e4e4e4;
+        margin: 0px auto 8px;
+        position: relative;
+        margin-left: 75px;
+    }
+
+    .tab {
+        width: 1200px;
+        height: 40px;
+    }
+
+    .tab li {
+        float: left;
+        width: 259px;
+        height: 40px;
+        border-right: 1px solid #ffffff;
+    }
+
+    .tab .shouye {
+        color: #0085D0;
+        width: 159px;
+        border-top: 2px solid #0085D0;
+    }
+
+    .tab a {
+        display: block;
+        text-align: center;
+        line-height: 40px;
+        color: #666;
+        font-size: 16px;
+        font-family: "微软雅黑", "宋体", "sans-serif";
+        font-weight: normal;
+        line-height: 40px;
+    }
+
+    .tab a:hover {
+        background: #f3f3f3;
+        color: #0085D0;
+    }
+
+    .downMenu {
+        width: 1200px;
+        height: 40px;
+        background: #fff;
+        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 40px;
+        left: 0;
+        display: none;
+        z-index: 999;
+    }
+
+    .downMenu a {
+        font-size: 14px;
+        float: left;
+        margin-left: 63px;
+    }
+
+   .downMenu a:hover {
+        background: #fff;
+        color: #0085D0;
+        text-decoration: underline;
+    }
+
+   .downMenu .downMenu1 {
+        font-size: 14px;
+        float: left;
+        margin-left: 123px;
+    }
+
+    .downMenu .downMenu2 {
+        font-size: 14px;
+        float: left;
+        margin-left: 100px;
+    }
+	</style>
+	<script>
+	window.onload = function () {
+		var tab = document.getElementsByClassName("tab")[0];
+        var lis = document.getElementsByClassName("item");
+        var downMenu = document.getElementsByClassName("downMenu");
+
+        for (var i = 0; i < lis.length; i++) {
+            lis[i].index = i;
+            lis[i].onmouseover = function () {
+
+                for (var j = 0; j < lis.length; j++) {
+                    downMenu[j].style.display = "none";
+                }
+                downMenu[this.index].style.display = "block";
+            }
+            lis[i].onmouseout = function () {
+                for (var j = 0; j < lis.length; j++) {
+                    downMenu[j].style.display = "none";
+                }
+            }
+        }
+    }
+	</script>
+</head>
+<body>
+	<div class="box">
+    <ul class="tab">
+        <li class="shouye">
+            <a href="javascript:;">首页</a>
+        </li>
+        <li class="item">
+            <a href="javascript:;">移动商城</a>
+
+            <div class="downMenu">
+                <a href="#">买手机</a>
+                <a href="#" class="downMenu1">办套餐</a>
+                <a href="#" class="downMenu1">办业务</a>
+                <a href="#" class="downMenu1">挑配件</a>
+                <a href="#" class="downMenu1">立即充值</a>
+                <a href="#" class="downMenu1">个人中心</a>
+
+            </div>
+        </li>
+        <li class="item"><a href="javascript:;">我的移动</a>
+
+            <div class="downMenu">
+                <a href="#">我的账户</a>
+                <a href="#" class="downMenu2">套餐余量查询</a>
+                <a href="#" class="downMenu2">业务状态查询</a>
+                <a href="#" class="downMenu2">详单查询</a>
+                <a href="#" class="downMenu2">账单查询</a>
+                <a href="#" class="downMenu2">积分查询</a>
+                <a href="#" class="downMenu2">星级查询</a>
+            </div>
+        </li>
+        <li class="item"><a href="javascript:;">网上营业厅</a>
+
+            <div class="downMenu">
+                <a href="#">网上充值</a>
+                <a href="#" class="downMenu2">话费服务</a>
+                <a href="#" class="downMenu2">资讯套餐</a>
+                <a href="#" class="downMenu2">选号入网</a>
+                <a href="#" class="downMenu2">优惠购机</a>
+                <a href="#" class="downMenu2">业务办理</a>
+                <a href="#" class="downMenu2">优惠促销</a>
+            </div>
+        </li>
+        <li class="item"><a href="javascript:;">服务与支持</a>
+
+            <div class="downMenu">
+                <a href="#">产品</a>
+                <a href="#" class="downMenu2">资费专区</a>
+                <a href="#" class="downMenu2">终端售后点查询</a>
+                <a href="#" class="downMenu2">国际/港澳台</a>
+                <a href="#" class="downMenu2">星级服务</a>
+                <a href="#" class="downMenu2">自助终端</a>
+                <a href="#" class="downMenu2">大数据应用</a>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
