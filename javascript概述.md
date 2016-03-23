@@ -19,6 +19,7 @@ var vr=function(){}         //function
 var vr=true/false           //boolean
 var vr=undefined            //undefined
 var vr=null                 //none
+```
 
 ### 运算符
 	* + - * / %
