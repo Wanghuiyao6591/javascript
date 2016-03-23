@@ -1,4 +1,4 @@
-# javascript概述、
+# javascript概述
 
 ## 程序语言
 
