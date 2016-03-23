@@ -2,75 +2,118 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>普通轮播</title>
+    <title>无缝轮播</title>
     <script src="./js/function.js"></script>
     <script src="./js/animate.js"></script>
     <script>
-    window.onload = function () {
+    window.onload=function(){
         var win = $(".banner")[0];
         var imgs = $("a", win);
-        var lins = $("li", win);
-        var num = 0;
+        var lis = $("li", win);
+        var imgW=parseInt(getStyle(imgs[0],"width"));
+        var flag=true;
+
         var btnL=$(".btn-left")[0];
         var btnR=$(".btn-right")[0];
-        var t = setInterval(move, 1500);
+        var index=0;
+        var num=0;
 
-        win.onmouseover = function () {
-            clearInterval(t);
-        }
-        win.onmouseout = function () {
-            clearInterval(t);
-        t = setInterval(move, 1000);
-        }
+        var t;
 
-        for (var i = 0; i < lins.length; i++) {
-            lins[i].index = i;
-            lins[i].onclick = function () {
-                num = this.index;
-                for (var i = 0; i < imgs.length; i++) {
-                    animate(imgs[i],{opacity:0},500);
-                    lins[i].className = "";
-                }
-                animate(imgs[num],{opacity:1},500);
-                lins[this.index].className = "hot";
-
+        for(var i=0;i<imgs.length;i++){
+            if(i==0){
+                continue;
             }
+            imgs[i].style.left=imgW+"px";
+        } 
+        lis[0].style.background="red";
+
+        t=setInterval(move,2000);
+
+        win.onmouseover=function(){
+            clearInterval(t);
         }
-        btnR.onclick = function () {
-            move();
+        win.onmouseout=function(){
+            t=setInterval(move,2000);
+        }
+        for(var i=0;i<imgs.length;i++){
+            lis[i].index=i;
+            lis[i].onclick=function(){
+                if(index==this.index){
+                    return;
+                }
+                for(var i=0;i<imgs.length;i++){
+                    lis[i].style.background="#fff";
+                }
+                lis[this.index].style.background="red";
+
+                imgs[this.index].style.left=imgW+"px";
+                animate(imgs[index],{left:-imgW},600);
+                animate(imgs[this.index],{left:0},600);
+                index=num=this.index;
+            }
         }
         btnL.onclick=function(){
-            num--;
-            if (num <0) {
-                num = imgs.length-1;
-            }
-            for (var i = 0; i < imgs.length; i++) {
-                animate(imgs[i],{opacity:0},500);
-                lins[i].className = "";
-            }
-            animate(imgs[num],{opacity:1},500);
-            lins[num].className = "hot";
+            moveL();
         }
-        function move() {
+        btnR.onclick=function(){
+            move();
+        }
+        function move(){
+            if(!flag){
+                return;
+            }
+            flag=false;
+
             num++;
-            if (num == imgs.length) {
-                num = 0;
+            if(num==imgs.length){
+                num=0;
             }
-            for (var i = 0; i < imgs.length; i++) {
-                animate(imgs[i],{opacity:0},500);
-                lins[i].className = "";
+            imgs[num].style.left=imgW+"px";
+            animate(imgs[index],{left:-imgW},600,function(){
+                flag=true;
+            });
+            animate(imgs[num],{left:0},600,function(){
+                flag=true
+            });
+            for(var i=0;i<imgs.length;i++){
+                lis[i].style.background="#fff";
             }
-            animate(imgs[num],{opacity:1},500);
-            lins[num].className = "hot";
+            lis[num].style.background="red";
+            index=num;
+        }
+        function moveL(){
+            if(!flag){
+                return;
+            }
+            flag=false;
+
+            num--;
+            if(num==0){
+                num=imgs.length-1;
+            }
+            imgs[num].style.left=imgW+"px";
+            animate(imgs[index],{left:-imgW},600,function(){
+                flag=true;
+            });
+            animate(imgs[num],{left:0},600,function(){
+                flag=true
+            });
+            for(var i=0;i<imgs.length;i++){
+                lis[i].style.background="#fff";
+            }
+            lis[num].style.background="red";
+            index=num;
         }
     }
     </script>
-    <style>
+     <style>
         .banner{
             width: 730px;
             height: 454px;
             margin: 50px auto;
             position: relative;
+            overflow: hidden;
         }
         .banner a{
             display: block;
@@ -145,7 +188,7 @@
         <img src="img/1.jpg" alt="" />
     </a>
     <a href="#">
-        <img src="img/2.jpg" alt="" style="z-index:10"/>
+        <img src="img/2.jpg" alt="" style=" "/>
     </a>
     <a href="#">
         <img src="img/3.jpg" alt=""/>
@@ -169,6 +212,5 @@
         <div class="btn-right">&gt;</div>
     </div>
 </div>
-
 </body>
 </html>
