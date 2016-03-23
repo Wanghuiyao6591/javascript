@@ -5,21 +5,23 @@
 * 基础逻辑处理部分
 
   * 变量 数据类型           (数据)
+
+    ### 数据类型
+        ```javascript
+          var vr=4;                   //num
+          var vr=1.2;                 //num
+          var vr='string';            //string
+          var vr=[1,2,3,4];           //arry
+          var vr={a:1,b:2};           //object
+          var vr=function(){}         //function
+          var vr=true/false           //boolean
+          var vr=undefined            //undefined
+          var vr=null                 //none
+        ```
+        
   * 分支和循环 运算符       (逻辑操作部分)
   * 函数                   （对语言的拓展）
 
-### 数据类型
-```javascript
-var vr=4;                   //num
-var vr=1.2;                 //num
-var vr='string';            //string
-var vr=[1,2,3,4];           //arry
-var vr={a:1,b:2};           //object
-var vr=function(){}         //function
-var vr=true/false           //boolean
-var vr=undefined            //undefined
-var vr=null                 //none
-```
 
 ### 运算符
 	* + - * / %
