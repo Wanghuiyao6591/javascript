@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>节点轮播</title>
+    <script src="./js/function.js"></script>
+    <script src="./js/animate.js"></script>
+    <script>
+        window.onload = function () {
+            var win = $(".nodewindow")[0];
+            var box = $(".nodebox", win)[0];
+            var as = $("a", box);
+            var len = as.length;
+            var btnL = $(".nodebtnl", win)[0];
+            var btnR = $(".nodebtnr", win)[0];
+            var aW = parseInt(getstyle(as[0], "width"));
+            box.style.width = aW * len + "px";
+            var flag = true;
+            var t;
+            t = setInterval(move, 1000);
+
+            win.onmouseover = function () {
+                clearInterval(t);
+            }
+            win.onmouseout = function () {
+                t = setInterval(move, 1000);
+            }
+            btnL.onclick = function () {
+                move();
+            }
+            btnR.onclick = function () {
+                mover();
+            }
+            function move() {
+                if (!flag) {
+                    return;
+                }
+                flag = false;
+                animate(box, {left: -aW}, function () {
+                    var first = getfirst(box);
+                    box.style.left = "0px";
+                    box.appendChild(first);
+                    flag = true;
+                })
+            }
+
+            function mover() {
+                if (!flag) {
+                    return;
+                }
+                flag = false;
+                var first = getfirst(box);
+                var last = getlast(box);
+                box.style.left = -aW + "px";
+                box.insertBefore(last, first);
+                animate(box, {left: aW}, function () {
+
+                    flag = true;
+                })
+            }
+        }
+    </script>
+    <style>
+        .nodewindow{
+            width:940px;
+            height:110px;
+            border:3px solid red;
+            margin:50px auto;
+            position: relative;
+            overflow: hidden;
+
+        }
+        .nodebox{
+            width:1175px;
+            height:100%;
+            /*margin:50px auto;*/
+            position: absolute;
+            left:0px;
+            top:0px;
+            z-index: -1;
+        }
+        .nodebox a{
+            width:235px;
+            height:110px;
+            display:block;
+            float:left;
+            font-size:0;
+        }
+
+        .nodebtn{
+            width:100%;
+            height: 30px;
+            position: absolute;
+            left:0;
+            top:50%;
+            margin-top: -15px;
+        }
+        .nodebtnl{
+            width:40px;
+            height:30px;
+            float:left;
+            opacity:0.5;
+            line-height: 30px;
+            cursor:pointer;
+        }
+        .nodebtnr{
+            width:40px;
+            height:30px;
+            float:right;
+            opacity:0.5;
+            line-height: 30px;
+            cursor:pointer;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class='nodewindow'>
+    <div class='nodebox'>
+        <a href="javascript:;">
+            <img src="./img/6.jpg" alt="">
+        </a>
+        <a href="javascript:;">
+            <img src="./img/7.jpg" alt="">
+        </a>
+        <a href="javascript:;">
+            <img src="./img/8.jpg" alt="">
+        </a>
+        <a href="javascript:;">
+            <img src="./img/9.jpg" alt="">
+        </a>
+        <a href="javascript:;">
+            <img src="./img/10.jpg" alt="">
+        </a>
+    </div>
+    <div class='nodebtn'>
+        <div class="nodebtnl">
+            &LT;
+        </div>
+        <div class="nodebtnr">
+            &GT;
+        </div>
+    </div>
+</div>
+</body>
+</html>
