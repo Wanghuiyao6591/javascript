@@ -84,9 +84,41 @@
 ##### 选取元素
 
    * var el=document.getElementById();
+   * var el=document.querySelector();
+
    * var el=document.getElementsByClassName();
    * var el=document.getElementsByTagName();
    * var el=document.getElementsName();
+   * var el=document.querySelectorAll();
+
+   经过这一步我们会得到一个dom元素或dom集合
+
+   dom对象
+   js会用一个很大的对象来代表页面中我们看到的那个元素
+
+   ```javascript
+   var obj={
+       offsetWidth:111;
+       offsetWidth:111;
+       style{
+           color:null;
+           width:null;
+           }
+           nextSibling:domobj,
+           _proto_:{
+               getAttribute:function();
+               }
+           }
+        }
+
+   dom集合
+   在一个类数组对象中存储很多dom对象构成一个集合
+
+   ```javascript
+   var obj={
+      
+   }
+
 
 ##### 筛选元素
 
