@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>donghua</title>
+	<script src="function1.js"></script>
+	<script>
+		var animate=function(obj,attr,speed,callback){
+			var t=setInterval(function(){
+				for(var i in attr){
+					var val=parseInt(getStyle(obj,i));
+					if(val>=attr[i]){
+						val=attr[i];
+						clearInterval(t);
+						if(callback){
+							callback.call(obj);
+						}
+					}
+					obj.style[i]=val+speed+"px";
+				}
+			},50)
+		}
+	</script>
+	<script>
+		$(function(){
+			var input=$("input")[0];
+			var div=$("div")[0];
+
+			input.onclick=function(){
+				animate(div,{width:500,height:500},10);
+			}
+		})
+	</script>
+</head>
+<body>
+	<input type="button" value="点击">
+	<div style="width:200px;height:200px;border:1px solid red;"></div>
+</body>
+</html>

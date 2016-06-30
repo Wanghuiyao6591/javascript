@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>按需加载</title>
+	<script src="../function.js"></script>
+	<script src="../animate.js"></script>
+	<script>
+       $(function(){
+         var cW=document.documentElement.clientWidth;
+         var cH=document.documentElement.clientHeight;
+         var floors=$(".img");
+         var floorArr=[];
+         var flag=true;
+         for(var i=0;i<floors.length;i++){
+         	floorArr.push(floors[i].offsetTop);
+         }
+//     ************************************楼层跳转********************************************
+         var lis=$("li",$("ul")[0]);
+         for(var i=0;i<lis.length;i++){
+         	lis[i].index=i;
+         	lis[i].onclick=function(){
+         		flag=false;
+         		// var obj=document.body.scrollTop?document.body:document.documentElement;
+         		// var tops=obj.scrollTop;
+         		animate(document.body,{scrollTop:floors[this.index].offsetTop},function(){
+         			flag=true;
+         		});
+         		animate(document.documentElement,{scrollTop:floors[this.index].offsetTop},function(){
+         			flag=true;
+         		});
+         		for(var j=0;j<lis.length;j++){
+         			lis[j].className=" ";
+         		}
+         		lis[this.index].className="hot";
+         	}
+         }
+
+
+
+//     ************************************按需加载********************************************
+         window.onscroll=function(){
+         	var obj=document.body.scrollTop?document.body:document.documentElement;
+         	var tops=obj.scrollTop;
+         	for(var i=0;i<floors.length;i++){
+         			var img1s=$("img");
+         			for(var j=0;j<img1s.length;j++){
+         				if(cH+tops>=floorArr[j]+300){
+         					img1s[j].src=img1s[j].getAttribute("imgpath");
+         					if(!flag) continue;
+         					for(var k=0;k<lis.length;k++){
+         					    lis[k].className=" "
+         				    }
+         					lis[j].className="hot";
+         				}
+         			}
+         		}
+//     ************************************楼层按钮********************************************         	
+         	// for(var i=0;i<floors.length;i++){
+         	// 	if(cH+tops>=floorArr[i]+300){
+         	// 		var lis=$("li",$("ul")[0]);
+         	// 		if(!flag) return;
+         	// 		for(var j=0;j<lis.length;j++){
+         	// 			lis[j].className=" "
+         	// 		}
+         	// 		lis[i].className="hot";
+
+         	// 	}
+         	// }
+ //     ************************************顶部搜索********************************************
+ 		var search=$(".search")[0];
+ 		if(scrollTop>=floorArr[1]){
+ 			animate(search,{top:0});
+ 		}else{
+ 			animate(search,{top:-40});
+ 		}
+
+    }
+//     ************************************返回顶部******************************************** 
+       
+            var back=$(".back")[0];
+            back.onclick=function(){
+        		var obj=document.body.scrollTop?document.body:document.documentElement;
+        		animate(obj,{scrollTop:0});
+            } 
+
+    
+
+})
+	</script>
+	<style>
+		.head,.footer{
+			width:740px;
+			height: 400px;
+			background: red;
+			margin: 20px auto;
+		}
+		.img{
+			width:740px;
+			height: 400px;
+			background: #ccc;
+			margin: 0 auto;
+		}
+		ul,li{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		ul{
+			width:40px;
+			height: 320px;
+			position: fixed;
+			top:50%;
+			left: 30px;
+			margin-top: -160px;
+		}
+		.back{
+			width:40px;
+			height: 39px;
+			border-bottom: 1px solid red;
+			text-align: center;
+			line-height: 39px;
+			position: fixed;
+			top:50%;
+			margin-top: -200px;
+			left: 30px;
+		}
+		li{
+			width:40px;
+			height: 39px;
+			border-bottom: 1px solid red;
+			text-align: center;
+			line-height: 39px;
+		}
+		.hot{
+			background: red;
+			color: #fff;
+		}
+		.search{
+			width:100%;
+			height: 40px;
+			background: yellow;
+			position: fixed;
+			top:-40px;
+
+		}
+	</style>
+</head>
+<body>
+	<div class="head"></div>
+	<div class="img">
+		第一层
+		<img src="" imgpath="banner1.jpg" alt="" >
+	</div>
+	<div class="img">
+		第二层
+		<img imgpath="banner2.jpg" alt="" src="">
+	</div>
+	<div class="img">
+		第三层
+		<img imgpath="banner3.jpg" alt="" src="">
+	</div>
+	<div class="img">
+		第四层
+		<img imgpath="banner4.jpg" alt="" src="">
+	</div>
+	<div class="img">
+		第五层
+		<img imgpath="banner5.jpg" alt="" src="">
+	</div>
+	<div class="img">
+		第六层
+		<img imgpath="banner6.jpg" alt="" src="">
+	</div>
+	<div class="img">
+		第七层
+		<img imgpath="banner7.jpg" alt="" src="">
+	</div>
+	<div class="img">
+		第八层
+		<img imgpath="banner8.jpg" alt="" src="">
+	</div>
+	<div class="back">返回</div>
+	<ul>
+		<li class="hot">1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+	</ul>
+	<div class="search">搜索</div>
+	<div class="footer"></div>
+</body>
+</html>

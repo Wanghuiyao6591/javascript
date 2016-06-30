@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>鼠標拖拽</title>
+	<script src="../function.js"></script>
+	<style>
+		.big{
+			width: 300px;
+			height: 300px;
+			border: 3px solid pink;
+			position: relative;
+			top:20px;
+			left: 20px;
+		}
+		.box{
+			width: 200px;
+			height: 200px;
+			background: yellow;
+			position: absolute;
+			top:0;
+			left:10px;
+
+		}
+	</style>
+	<script>
+	// window.onload=function(){
+	// 	var box=document.getElementsByTagName("div")[0];
+	// 	box.onmousedown=function(e){
+	// 		var ev=e||window.event;
+	// 		var mw=ev.offsetX;
+	// 		var mh=ev.offsetY;
+	// 		document.onmousemove=function(e){
+	// 			var ev=e||window.event;
+	// 			var ew=ev.clientX;
+	// 			var eh=ev.clientY;
+	// 			box.style.left=ew-mw+"px";
+	// 			box.style.top=eh-mh+"px";
+	// 		}
+	// 		box.onmouseup=function(){
+	// 			box.onmousedown=null;
+	// 			document.onmousemove=null;
+	// 			box.onmouseup=null;
+	// 		}
+			
+	// 	}
+	// }
+	$(function(){
+		var box=$(".box")[0];
+		var big=$(".big")[0];
+		console.log(big);
+		console.log(box);
+		
+		addEvent(box,"mousedown",down);
+		function down(e){
+			var ev=e||window.event;
+			var mw=ev.offsetX;
+			var mh=ev.offsetY;
+			// var boxLeft=box.offsetLeft;//子元素相对于父元素的距离
+			// var boxTop=box.offsetTop;//子元素相对于父元素的距离
+			// x=子元素到浏览器的距离-子元素到父元素的距离
+			addEvent(document,"mousemove",move);
+			function move(e){
+				var ev=e||window.event;
+				var ew=ev.clientX;
+				var eh=ev.clientY;
+				
+
+				box.style.left=ew-mw+(offset(box).left-box.offsetLeft)+"px";
+				box.style.top=eh-mh+(offset(box).top-box.offsetTop)+"px"
+			}
+			addEvent(box,"mouseup",up);
+			function up(){
+				// removeEvent(box,"mousedown",down)
+				removeEvent(document,"mousemove",move)
+				removeEvent(box,"mouseup",up)
+			}
+		}	
+	})
+	</script>
+</head>
+<body>
+	<div class="big">
+		<div class="box"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜有遮罩</title>
+	<script src="../function.js"></script>
+	<script>
+		$(function(){
+			var box1=$(".box1")[0];
+			var box2=$(".box2")[0];
+			var imgSmall=$(".imgSmall")[0];
+			var imgBig=$(".imgBig")[0];
+			var box2w=parseInt(getStyle(box2,"width"));
+			var box2h=parseInt(getStyle(box2,"height"));
+			var black=$(".black")[0];
+			var opacity=$(".opacity")[0];
+			var imgSmallw=parseInt(getStyle(imgSmall,"width"));
+			var imgSmallh=parseInt(getStyle(imgSmall,"height"));
+			var blackw=parseInt(getStyle(black,"width"));
+			var blackh=parseInt(getStyle(black,"height"));
+
+			opacity.onmousemove=function(e){
+				var ev=e||window.event;
+				var ew=ev.offsetX;
+				var eh=ev.offsetY;
+				if(ew<=blackw/2){
+					ew=blackw/2;
+				}
+				if(ew>=imgSmallw-blackw/2){
+					ew=imgSmallw-blackw/2;
+				}
+				if(eh<=blackh/2){
+					eh=blackh/2;
+				}
+				if(eh>=imgSmallh-blackh/2){
+					eh=imgSmallh-blackh/2;
+				}
+
+				//遮罩要跟随鼠标移动
+				var blackL=ew-blackw/2;
+				var blackT=eh-blackh/2;
+				black.style.left=blackL+"px";
+				black.style.top=blackT+"px";
+
+				//调整大图片的尺寸
+				var imgBigw=imgSmallw*box2w/blackw;
+				var imgBigh=imgSmallh*box2h/blackh;
+				imgBig.style.width=imgBigw+"px";
+				imgBig.style.height=imgBigh+"px";
+
+				imgBig.style.left=-blackL*imgBigw/ imgSmallw+"px";
+				imgBig.style.top=-blackT*imgBigh/imgSmallh+"px";
+
+			}
+		})
+	</script>
+	<style>
+		.box1{
+			width: 200px;
+			height: 296px;
+			margin-right: 70px;
+			margin-left: 20px;
+			float: left;
+			overflow: hidden;
+			position: relative;
+		}
+		.box2{
+			width: 200px;
+			height: 200px;
+			margin-right: 70px;
+			margin-left: 20px;
+			overflow: hidden;
+			position: relative;
+			float: left;
+		}
+		.opacity{
+			width: 200px;
+			height: 296px;
+			position: absolute;
+			top:0px;
+			left:0px;
+			background: transparent;
+			z-index: 3;
+		}
+		.black{
+			width: 60px;
+			height: 60px;
+			background: #ccc;
+			position: absolute;
+			opacity: 0.5;
+			z-index: 2;
+			top:0;
+			left: 0;
+		}
+		.imgSmall{
+			width:200px;
+			height: 296px;
+		}
+		.imgBig{
+			position: absolute;
+			top:0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1">
+		<img src="2.jpg" alt="" class="imgSmall">
+		<div class="black"></div>
+		<div class="opacity"></div>
+	</div>
+	<div class="box2">
+		<img src="2.jpg" alt="" class="imgBig">
+	</div>
+</body>
+</html>

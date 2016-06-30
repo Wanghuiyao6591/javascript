@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件</title>
+	<style>
+		.box{
+			width: 200px;
+			height: 200px;
+			background: yellow;
+			text-align: center;
+			line-height: 200px;
+			position: absolute;
+			top:0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+	<!-- <div class="box" onclick="alert('我是事件1')"> -->
+	<div class="box">
+		點我
+	</div>
+</body>
+<script>
+			var box=document.getElementsByTagName("div")[0];
+			//*******************原始方法*****************
+			// box.onclick=function(){
+			// 	alert("我是事件2")
+			// }
+			// box.onclick=null;
+			//*******************w3c*****************
+			// box.addEventListener("click",aa,false);
+			// box.removeEventListener("click",aa,false);
+			//*******************ie*****************
+			// box.attachEvent("onclick",aa);
+			// box.detachEvent("onclick",aa);
+			// function aa(){
+			// 	alert("我是事件3")
+			// }	    
+	</script>
+</html>

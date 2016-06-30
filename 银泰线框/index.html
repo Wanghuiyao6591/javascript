@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>银泰线框</title>
+	<script src="../function.js"></script>
+	<script src="../animate.js"></script>
+	<style>
+		.box{
+			width: 260px;
+			height: 300px;
+			border: 1px solid #ccc;
+			position: relative;
+			margin: 0 auto;
+		}
+		.left{
+			width: 1px;
+			height: 0;
+			background: #000;
+			position: absolute;
+			left: -1px;
+			top:-1px;
+		}
+		.top{
+			width: 0;
+			height: 1px;
+			background: #000;
+			position: absolute;
+			top: -1px;
+			left: -1px;
+			overflow: hidden;
+		}
+		.right{
+			width: 1px;
+			height: 0;
+			background: #000;
+			position: absolute;
+			bottom: -1px;
+			right: -1px;
+			overflow: hidden;
+		}
+		.bottom{
+			width:0;
+			height: 1px;
+			background: #000;
+			position: absolute;
+			bottom: -1px;
+			right: -1px;
+			overflow: hidden;
+		}
+	</style>
+	<script>
+		$(function(){
+			var boxs=$(".box");
+			console.log(boxs)
+			for(var i=0;i<boxs.length;i++){
+				line(boxs[i]);
+			}
+
+			function line(obj){
+				var bW=obj.offsetWidth;
+				var bH=obj.offsetHeight;
+				// console.log(bH)
+				var left=$(".left")[i];
+				console.log(left)
+				var right=$(".right")[i];
+				var top=$(".top")[i];
+				var bottom=$(".bottom")[i];
+
+				obj.onmouseover=function(){
+					animate(left,{height:bH});
+					animate(right,{height:bH});
+					animate(top,{width:bW});
+					animate(bottom,{width:bW});
+				}
+				obj.onmouseout=function(){
+					animate(left,{height:0});
+					animate(right,{height:0});
+					animate(top,{width:0});
+					animate(bottom,{width:0});
+				}
+			}
+			// line(boxs[0]);
+		})
+	</script>
+</head>
+<body>
+	<div class="box">
+		<div class="left"></div>
+		<div class="right"></div>
+		<div class="top"></div>
+		<div class="bottom"></div>
+	</div>
+</body>
+</html>

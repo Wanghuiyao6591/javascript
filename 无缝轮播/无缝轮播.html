@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="function.js"></script>
+	<script src="animate.js"></script>
+	<script>
+		$(function(){
+			var box=$(".box")[0];
+			var imgs=$("a");
+			var lis=$("li");
+			var btnL=$(".btnL")[0];
+			var btnR=$(".btnR")[0];
+			var index=0;
+			var next=0;
+			var flag=true;
+			var widths=parseInt(getStyle(box,"width"));
+			lis[0].style.background="red";
+			for(var i=0;i<imgs.length;i++){
+				if(i==0){
+					continue;
+				}
+				imgs[i].style.left=widths+"px";
+			}
+			function moveR(){
+				next++;
+				if(next==imgs.length){
+					next=0;
+				}
+				//初始化状态
+				imgs[next].style.left= widths+"px";
+				//开始轮播
+				// animate(imgs[next],{left:widths});
+				animate(imgs[index],{left:-widths},function(){flag=true;});
+				animate(imgs[next],{left:0});
+				lis[index].style.background="#ccc";
+				lis[next].style.background="red";
+				// lis[index].style.background="red";
+				index=next;
+			}
+			function moveL(){
+				next--;
+				if(next<0){
+					next=imgs.length-1;
+				}
+				//初始化状态
+				imgs[next].style.left=-widths+"px";
+				//开始轮播
+				// animate(imgs[next],{left:widths});
+				animate(imgs[index],{left:widths},function(){flag=true;});
+				animate(imgs[next],{left:0});
+				lis[index].style.background="#ccc";
+				lis[next].style.background="red";
+				// lis[index].style.background="red";
+				index=next;
+			}
+			var t=setInterval(moveR,1000);
+			box.onmouseover=function(){
+				clearInterval(t);
+			}
+			box.onmouseout=function(){
+				t=setInterval(moveR,1000);
+			}
+			btnL.onclick=function(){
+				if(flag){
+					flag=false;
+					moveL();
+				}
+			}
+			btnR.onclick=function(){
+				if(flag){
+					flag=false;
+					moveR();
+				}
+			}
+		    for(var i=0;i<lis.length;i++){
+				lis[i].index=i;
+				lis[i].onclick=function(){
+					if(this.index==index){
+						return;
+					}else if(this.index>index){
+						//初始化状态
+						imgs[this.index].style.left=widths+"px";
+						//开始轮播
+						// imgs[index].style.left=-widths+"px";
+						// imgs[this.index].style.left=0;
+						animate(imgs[index],{left:-widths},function(){flag=true;});
+						animate(imgs[this.index],{left:0});
+						lis[index].style.background="#ccc";
+						lis[this.index].style.background="red";
+						next=this.index;
+						index=this.index;
+					}else if(this.index<index){
+						//初始化状态
+						imgs[this.index].style.left=-widths+"px";
+						//开始轮播
+						// imgs[index].style.left=widths+"px";
+						animate(imgs[index],{left:widths},function(){flag=true;});
+						// imgs[this.index].style.left=0;
+						animate(imgs[this.index],{left:0});
+						lis[index].style.background="#ccc";
+						lis[this.index].style.background="red";
+						next=this.index;
+						index=this.index;
+					}	
+				}
+			}
+		})
+	</script>
+	<style>
+		.box{
+			width: 740px;
+			height: 350px;
+			position: relative;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+		.box a{
+			display: block;
+			width: 740px;
+			height: 350px;
+			position: absolute;
+		}
+		#aa{
+			left: 0;
+			top: 0;
+		}
+		ul{
+			width: 200px;
+			height: 15px;
+			position: absolute;
+			top:300px;
+			left: 230px;
+		}
+		li{
+			list-style: none;
+			float: left;
+			width: 15px;
+			height: 15px;
+			margin-left: 10px;
+			border-radius: 50%;
+			background: #ccc;
+			z-index: 1;
+		}
+		.btn{
+			width: 740px;
+			height: 50px;
+			position: absolute;
+			top:150px;
+		}
+		.btnL{
+			width: 40px;
+			height: 50px;
+			float: left;
+			background: #ccc;
+			opacity: 0.5;
+		}
+		.btnR{
+			width: 40px;
+			height: 50px;
+			float: right;
+			background: #ccc;
+			opacity: 0.5;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<a href="javascript:;"id="aa">
+			<img src="banner1.jpg" alt="">
+		</a>
+		<a href="javascript:;">
+			<img src="banner2.jpg" alt="">
+		</a>
+		<a href="javascript:;">
+			<img src="banner3.jpg" alt="">
+		</a>
+		<a href="javascript:;">
+			<img src="banner4.jpg" alt="">
+		</a>
+		<a href="javascript:;">
+			<img src="banner5.jpg" alt="">
+		</a>
+		<a href="javascript:;">
+			<img src="banner6.jpg" alt="">
+		</a>
+		<a href="javascript:;">
+			<img src="banner7.jpg" alt="">
+		</a>
+		<a href="javascript:;">
+			<img src="banner8.jpg" alt="">
+		</a>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="btn">
+			<div class="btnL"></div>
+			<div class="btnR"></div>
+		</div>
+	</div>
+</body>
+</html>

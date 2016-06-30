@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>输入字数限制</title>
+	<link rel="stylesheet" href="输入字数限制.css">
+	<script src="function.js"></script>
+	<script>
+		$(function(){
+			var btn=$(".btn")[0];
+			var input=$("textarea")[0];
+			var title=$(".title")[0];
+			var num=$("span")[0];
+			
+			btn.onclick=function(e){
+				var ev=e||window.event;
+				var obj=ev.target||ev.srcElement;
+				var val=input.value;
+				var max_length=val.slice(0,50)
+				title.innerHTML+="<div style='width:70%;border-bottom: 1px solid pink;margin:0 auto'>"+max_length+"</div>";
+				input.value="";
+				num.innerHTML=50;
+			}
+			input.onkeyup=function(){
+				var val=input.value;
+				var vl=val.length;
+				console.log(vl);
+				num.innerHTML=50-vl;
+			}
+		})
+	</script>
+</head>
+<body>
+	<div class="box">
+		<div class="title">
+			<li>请输入留言内容</li>
+		</div>
+		<div class="text">
+			<textarea name="wenben" id="" cols="30" rows="10"></textarea>
+			<div class="btn">提交</div>
+			<div class="tishi">
+				还可以输入
+				<span>50</span>
+				个字，最多可输入50个字。
+			</div>
+		</div>
+	</div>
+</body>
+</html>

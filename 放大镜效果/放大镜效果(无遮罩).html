@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜效果</title>
+	<script src="../function.js"></script>
+	<script>
+		$(function(){
+			var box1=$(".box1")[0];
+			var box2=$(".box2")[0];
+			var imgSmall=$(".imgSmall")[0];
+			var imgBig=$(".imgBig")[0];
+			var imgSmallw=parseInt(getStyle(imgSmall,"width"));
+			var imgSmallh=parseInt(getStyle(imgSmall,"height"));
+			var imgBigw=parseInt(getStyle(imgBig,"width"));
+			var imgBigh=parseInt(getStyle(imgBig,"height"));
+			imgBig.style.display="none";
+	
+			imgSmall.onmousemove=function(e){
+				var ev=e||window.event;
+				var ew=ev.offsetX;
+				var eh=ev.offsetY;
+				imgBig.style.display="block";
+				imgBig.style.left=(-imgBigw/(imgSmallw/ew))/2+"px";
+				imgBig.style.top=(-imgBigh/(imgSmallh/eh))/2+"px";
+			}
+			imgSmall.onmouseout=function(e){
+				var ev=e||window.event;
+				imgBig.style.display="none";
+				imgBig.style.left=0;
+				imgBig.style.top=0;
+			}
+		})
+	</script>
+	<style>
+		.box1{
+			width: 200px;
+			height: 296px;
+			margin-right: 70px;
+			margin-left: 20px;
+			float: left;
+			overflow: hidden;
+			position: relative;
+		}
+		.box2{
+			width: 200px;
+			height: 200px;
+			margin-right: 70px;
+			margin-left: 20px;
+			overflow: hidden;
+			position: relative;
+			float: left;
+		}
+		.imgSmall{
+			width:200px;
+			height: 296px;
+		}
+		.imgBig{
+			width: 500px;
+			height: 740px;
+			position: absolute;
+			top:0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="box1">
+		<img src="2.jpg" alt="" class="imgSmall">
+	</div>
+	<div class="box2">
+		<img src="2.jpg" alt="" class="imgBig">
+	</div>
+</body>
+</html>

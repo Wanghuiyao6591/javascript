@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		window.onload=function(){
+			var one=document.getElementsByTagName("div")[0];
+			var body=document.getElementsByTagName("body")[0];
+			var oneH=parseInt(getComputedStyle(one,null).height);
+			var dH=document.documentElement.clientHeight;
+			var dW=document.documentElement.clientWidth;
+			// alert(a)
+			// alert(dW);
+			var speedX=10;
+			var speedY=10;
+			var t=setInterval(move,70)
+			function move(){
+				var oneT=one.offsetTop;
+				// alert(oneT)
+				var oneL=one.offsetLeft;
+				if(oneL>dW-oneH){
+					oneL=dW-oneH;
+					speedX=-speedX;
+				}
+				if(oneL<=0){
+					oneL=0;
+					speedX=-speedX
+				}
+				if(oneT>dH-oneH){
+					oneT=dH-oneH;
+					speedY=-speedY;
+				}
+				if(oneT<=0){
+					oneT=0;
+					speedY=-speedY
+				}
+				one.style.top=oneT+speedY+"px";
+				one.style.left=oneL+speedX+"px";
+			}
+			one.onmouseover=function(){
+				clearInterval(t);
+				}
+			one.onmouseout=function(){
+				t=setInterval(move,70);
+			}
+			one.onclick=function(){
+				
+			}
+		}
+	</script>
+	<style>
+		.one{
+			width: 100px;
+			height: 100px;
+			background: yellow;
+			position: absolute;
+			left: 0;
+			top:0;
+		}
+	</style>
+</head>
+<body>
+	<div class="one"></div>
+</body>
+</html>

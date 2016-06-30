@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>节点方法</title>
+	<script>
+		function insertBefore(){
+
+		} 
+	</script>
+	<script>
+		window.onload=function(){
+			var btn=document.getElementById("btn");
+			var body=document.getElementsByTagName("body")[0];
+			btn.onclick=function(){
+				var div=document.createElement("div");
+				div.style.cssText="width:400px;height:400px;border:1px solid red";
+				body.appendChild(div);
+				// body.insertBefore(div,one);
+			}
+		}
+	</script>
+	<style>
+		#one{
+			width: 100px;
+			height: 100px;
+			background: yellow;
+		}
+	</style>
+</head>
+<body>
+	<input type="button" id="btn" value="点击">
+	<div id="one"></div>
+</body>
+</html>

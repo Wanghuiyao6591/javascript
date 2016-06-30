@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>滚轮事件</title>
+	<script src="function.js"></script>
+	<script>
+		$(function(){
+			var box=$(".box")[0];
+			var speed=10;
+			onMousewheel(document,aa,bb);
+			function aa(){
+				var bw=box.offsetWidth;
+				var bh=box.offsetHeight;
+				box.style.width=bw+speed+"px";
+				box.style.height=bh+speed+"px";
+			}
+			function bb(){
+				var bw=box.offsetWidth;
+				var bh=box.offsetHeight;
+				box.style.width=bw-speed+"px";
+				box.style.height=bh-speed+"px";
+			}
+		})
+	</script>
+	<style>
+	.box{
+		width: 100px;
+		height: 100px;
+		background: yellow;
+	}
+</style>
+</head>
+
+<body>
+	<div class="box"></div>
+</body>
+</html>
